@@ -5,8 +5,8 @@ setGlobalBioImPath;
  y = [0; 1; 2; 3; 4];
  z = [0; 2; 3; 3; 2];
 
- % Regularization parameter
-lambda = 0;
+ % Regularization parameter (lambda = 0 -> constrained interpolation problem)
+lambda = 0; 
 
 % ADMM parameters
 rho = 1e0; max_iter = 1000; relative_tol = 1e-14; iterVerb = 1; iterNum = 1;
@@ -21,7 +21,6 @@ sparsity_tol = relative_tol;
 knots = x_sol(abs(a_sol) > sparsity_tol);
 sparsity = sum(abs(a_sol) > sparsity_tol);
 solution = @(t) linear_spline(t, a_sol, x_sol, p_sol);
-certificate = @(t) linear_spline(t, a_cert, x_cert);
 
 fprintf('Minimum sparsity (lambda = %e): %i\n', lambda, sparsity);
 

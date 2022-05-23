@@ -1,0 +1,3 @@
+[submodule "GlobalBioIm"]
+	path = GlobalBioIm
+	url = https://github.com/Biomedical-Imaging-Group/GlobalBioIm

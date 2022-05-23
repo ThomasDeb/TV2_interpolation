@@ -1,10 +1,10 @@
 clear all; close all;
 setGlobalBioImPath;
 
+% Random generation of data points
 [y, z, gt] = generate_data(50, 5, 0.2);
 
 % Data points: (y(i), z(i))
-
 
 margin = (y(end) - y(1))/10; xmin = y(1) - margin; xmax = y(end) + margin;
 x_lim = [xmin, xmax]; param.x_lim = x_lim; param.y_lim = [0, 1];
@@ -56,15 +56,11 @@ function plot_solution(ax, lambda, y, z, param)
 sp_label = param.sp_label;
 % ADMM parameters
 rho = lambda/10; max_iter = 1000; relative_tol = 1e-14; iterVerb = 1; iterNum = 1;
-tic;
 [z_sol] = compute_z_sol(y, z, lambda, rho, max_iter, relative_tol, iterVerb, iterNum);
-toc;
 
-% Construct solution and certificate
+% Construct solution
 sparsity_tol = 1e-5;
-tic;
 [a_sol, x_sol, p_sol, ~, ~] = solve_interpolation(y, z_sol, sparsity_tol);
-toc;
 knots = x_sol(abs(a_sol) > sparsity_tol);
 sparsity = sum(abs(a_sol) > sparsity_tol);
 solution = @(t) linear_spline(t, a_sol, x_sol, p_sol);
