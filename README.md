@@ -3,8 +3,9 @@ Regression method for 1D data that minimizes second-order total-variation regula
 
 ## Getting started
 
-- main.m solves the (g-BLASSO) regression problem for a fixed regularization parameter
-- main_UI.m does so with a GUI that allows to user to vary the regularization parameter manually
+- gBLASSO_sol.m solves the (g-BLASSO) regression problem for a fixed regularization parameter
+- user_interface.m does so with a GUI that allows to user to vary the regularization parameter manually
+- main_example.m gives an example of how these functions are applied
 
 ## Reference
 
