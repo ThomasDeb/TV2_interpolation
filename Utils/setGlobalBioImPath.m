@@ -1,5 +1,5 @@
 %% Script which updates Matlab path to work with GlobalBioIm
 
-lpath = './GlobalBioIm';
+lpath = '../GlobalBioIm';
 addpath(genpath(lpath));
 

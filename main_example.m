@@ -21,7 +21,7 @@ sparsest_sol = @(t) linear_spline(t, a_sol, x_sol, p_sol);
 font_size = 15; line_width = 2; marker_size = 12;
 margin = (y(end) - y(1))/10; xmin = y(1) - margin; xmax = y(end) + margin;
 t_grid = linspace(xmin, xmax, 1e4);
-% Plot sparsest solution
+
 figure;
 plot(y, z, 'kx','LineWidth', line_width, 'Markersize', marker_size);
 leg = {'Data points'}; ax = gca; set(ax, 'FontSize', font_size); hold on;
