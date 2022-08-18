@@ -3,8 +3,18 @@ addpath('./Utils');
 setGlobalBioImPath;
 rng(1);
 
-% Generate data points
-[y, z] = generate_data(50, 5, 0.2);
+%% Generate random data (example)
+
+[x, y] = generate_data(50, 5, 0.2);
+
+% Write data in csv file 
+writematrix([x, y], 'data.csv');
+
+%% Read data from csv file
+
+% Read data in csv file with 2 columns (x and y coordinates of data points)
+M = readtable('data.csv');
+x = M.(1); y = M.(2); clear M;
 
 
 %% Example for single regularization parameter
@@ -12,18 +22,18 @@ rng(1);
 lambda = 7*1e-3;
 
 % Compute parametric form of sparsest solution
-[a_sol, x_sol, p_sol] = gBLASSO_sol(y, z, lambda);
+[a_sol, x_sol, p_sol] = gBLASSO_sol(x, y, lambda);
 
 % Function handle of sparsest solution
 sparsest_sol = @(t) linear_spline(t, a_sol, x_sol, p_sol);
 
 % Plot sparsest solution
 font_size = 15; line_width = 2; marker_size = 12;
-margin = (y(end) - y(1))/10; xmin = y(1) - margin; xmax = y(end) + margin;
+margin = (x(end) - x(1))/10; xmin = x(1) - margin; xmax = x(end) + margin;
 t_grid = linspace(xmin, xmax, 1e4);
 
 figure;
-plot(y, z, 'kx','LineWidth', line_width, 'Markersize', marker_size);
+plot(x, y, 'kx','LineWidth', line_width, 'Markersize', marker_size);
 leg = {'Data points'}; ax = gca; set(ax, 'FontSize', font_size); hold on;
 plot(t_grid, sparsest_sol(t_grid), 'Linewidth', line_width);
 leg = [leg, {'Sparsest solution'}];
@@ -37,11 +47,11 @@ end
 
 if lambda ~= 0
     ax.ColorOrderIndex = 1;
-    plot(y, sparsest_sol(y), 'x','LineWidth', line_width, 'Markersize', marker_size);
+    plot(x, sparsest_sol(x), 'x','LineWidth', line_width, 'Markersize', marker_size);
     leg = [leg, {'Denoised data points'}];
 end
 xlim([xmin, xmax]); legend(leg, 'Location', 'Best');
 
 %% Example of UI with varying lambda
 
-user_interface(y, z);
+user_interface(x, y);
