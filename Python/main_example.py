@@ -9,7 +9,7 @@ data = np.loadtxt("../data.csv", delimiter=",")
 x, y = data[:, 0], data[:, 1]
 
 # Regularization parameter
-lamb = 1e-2
+lamb = 1e-1
 
 # Compute denoised y
 y_denoised = denoise_y(x, y, lamb, rho=lamb)
