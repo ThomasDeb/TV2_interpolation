@@ -55,9 +55,12 @@ while k <= K
         n = n+1;
     end
     for i = 0 : ceil(n/2) - 1
-        % Add barycenter knot
-        a_sol_temp = [a_sol_temp; a_sol_z_nz(k+2*i) + a_sol_z_nz(k+2*i+1)];
-        x_sol_temp = [x_sol_temp; (a_sol_z_nz(k+2*i) * x_sol_z_nz(k+2*i) + a_sol_z_nz(k+2*i+1) * x_sol_z_nz(k+2*i+1)) / a_sol_temp(end)];
+        new_amp = a_sol_z_nz(k+2*i) + a_sol_z_nz(k+2*i+1)
+        if new_amp ~= 0:
+            % Add barycenter knot
+            a_sol_temp = [a_sol_temp; new_amp];
+            x_sol_temp = [x_sol_temp; (a_sol_z_nz(k+2*i) * x_sol_z_nz(k+2*i) + a_sol_z_nz(k+2*i+1) * x_sol_z_nz(k+2*i+1)) / new_amp];
+        end
     end
     if mod(n, 2) == 0
         % Keep existing knot
