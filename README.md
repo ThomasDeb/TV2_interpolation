@@ -1,7 +1,9 @@
 # TV<sup>(2)</sup> Interpolation
 Matlab and Python implementation of a regression method for noisy 1D data that minimizes second-order total-variation (TV<sup>(2)</sup>) regularization with the minimum number of piecewise-linear regions.
 It provides the sparsest solution (i.e., with the fewest breakpoints) to the following optimization problem:
-$$ \underset{f}{\arg \min} \Bigg\{ \frac12 \sum_{n=1}^N (f(x_n) - y_n)^2 + \lambda \Vert f'' \Vert_{\mathrm{TV}} \Bigg\}, $$
+
+$$ \underset{f}{\arg \min} \left( \frac12 \sum_{n=1}^N (f(x_n) - y_n)^2 + \lambda \Vert f'' \Vert_{\mathrm{TV}} \right), $$
+
 where:
 - $f$ is the (piecewise-linear) regression function
 - $(x_n, y_n)$ with $1 \leq n \leq N$ are the $N$ data points
